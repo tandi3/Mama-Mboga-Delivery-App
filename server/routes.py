@@ -16,12 +16,21 @@ CORS(app, origins=["http://localhost:3000"], supports_credentials=True)
 def register():
     try:
         data = request.get_json()
-        if not data or 'email' not in data or 'password' not in data or 'role' not in data:
-            return jsonify({"message": "Missing required fields"}), 400
+        # Validate required fields
+        required_fields = ['email', 'password', 'role']
+        if not data or not all(field in data for field in required_fields):
+            return jsonify({"message": "Missing required fields: email, password, role"}), 400
+        
+        # Validate email format
+        import re
+        email_pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+        if not re.match(email_pattern, data['email']):
+            return jsonify({"message": "Invalid email format"}), 400
+            
         if User.query.filter_by(email=data['email']).first():
             return jsonify({"message": "Email already exists"}), 400
         if len(data['password']) < 6:
-            return jsonify({"message": "Password too short"}), 400
+            return jsonify({"message": "Password must be at least 6 characters"}), 400
        
         hashed_password = bcrypt.generate_password_hash(data['password']).decode('utf-8')
         if data['role'] != 'customer':
