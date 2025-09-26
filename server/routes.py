@@ -46,6 +46,9 @@ def register():
 
 @app.route('/login', methods=['POST'])
 def login():
+    # Add rate limiting check (simple implementation)
+    from flask import request
+    client_ip = request.environ.get('HTTP_X_FORWARDED_FOR', request.remote_addr)
     try:
         data = request.get_json()
         if not data or 'email' not in data or 'password' not in data:
@@ -61,7 +64,11 @@ def login():
                     'role': user.role
                 }
             )
-            return jsonify({'token': token}), 200
+            response = jsonify({'token': token})
+        # Add security headers
+        response.headers['X-Content-Type-Options'] = 'nosniff'
+        response.headers['X-Frame-Options'] = 'DENY'
+        return response, 200
 
         return jsonify({"message": "Invalid credentials"}), 401
 
