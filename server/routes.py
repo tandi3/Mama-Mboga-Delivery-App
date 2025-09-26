@@ -243,6 +243,7 @@ def checkout():
         db.session.commit()
         return jsonify({"message": "Checkout successful. Delivery has started."}), 200
 
+
     except Exception as e:
         print("Error in checkout:", e)
         return jsonify({"message": f"An error occurred during checkout: {str(e)}"}), 500
