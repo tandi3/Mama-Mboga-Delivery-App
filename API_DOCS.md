@@ -1,16 +1,20 @@
 # Mama Mboga Delivery API Documentation
 
+Base URL: `http://localhost:5000`
+
 ## Authentication Endpoints
 
 ### POST /register
 Register a new customer account.
 - **Body**: `{"email": "string", "password": "string", "role": "customer"}`
-- **Response**: `{"message": "User created successfully"}`
+- **Response (201)**: `{"message": "User created successfully"}`
+- **Response (400)**: `{"error": "Email already exists"}`
 
 ### POST /login
 Login to get access token.
 - **Body**: `{"email": "string", "password": "string"}`
-- **Response**: `{"token": "jwt_token"}`
+- **Response (200)**: `{"token": "jwt_token"}`
+- **Response (401)**: `{"error": "Invalid credentials"}`
 
 ## Product Endpoints
 
