@@ -20,6 +20,14 @@
    - Build Command: `cd client && npm install && npm run build`
    - Publish Directory: `client/build`
 
-### Database
-1. Create PostgreSQL database
-2. Copy connection string to backend environment variables
+### Database Setup
+1. In Render Dashboard, click "New +" → "PostgreSQL"
+2. Name: `mama-mboga-db`
+3. Database Name: `mama_mboga`
+4. User: `mama_mboga_user`
+5. Click "Create Database"
+6. Copy the "External Database URL" from database info page
+7. In your backend web service:
+   - Go to Environment tab
+   - Add `DATABASE_URL` = paste the copied URL
+8. Your app will auto-create tables on first run
