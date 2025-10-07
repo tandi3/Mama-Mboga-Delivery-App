@@ -1,25 +1,25 @@
 # Deployment Guide
 
-## Heroku Deployment
+## Render Deployment
 
-1. Install Heroku CLI
-2. Login: `heroku login`
-3. Create app: `heroku create mama-mboga-app`
-4. Set environment variables:
-   ```
-   heroku config:set SECRET_KEY=your-production-secret-key
-   heroku config:set DATABASE_URL=your-database-url
-   ```
-5. Deploy: `git push heroku main`
+### Backend (Flask API)
+1. Go to Render Dashboard
+2. Create new Web Service
+3. Connect GitHub repo
+4. Configure:
+   - Build Command: `cd server && pip install -r requirements.txt`
+   - Start Command: `cd server && gunicorn app:app`
+   - Environment Variables:
+     - `SECRET_KEY`: Generate random value
+     - `DATABASE_URL`: Connect PostgreSQL database
 
-## Netlify Deployment (Frontend)
+### Frontend (React)
+1. Create new Static Site
+2. Connect same GitHub repo
+3. Configure:
+   - Build Command: `cd client && npm install && npm run build`
+   - Publish Directory: `client/build`
 
-1. Build client: `cd client && npm run build`
-2. Deploy build folder to Netlify
-3. Set environment variables in Netlify dashboard
-
-## Railway Deployment
-
-1. Connect GitHub repo to Railway
-2. Set environment variables
-3. Deploy automatically on push
+### Database
+1. Create PostgreSQL database
+2. Copy connection string to backend environment variables
