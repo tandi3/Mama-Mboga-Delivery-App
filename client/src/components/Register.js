@@ -14,7 +14,8 @@ const Register = () => {
       alert('Registration successful!');
     } catch (error) {
       console.error('Registration failed:', error);
-      alert('Registration failed: ' + error.message);
+      const errorMessage = error.response?.data?.message || error.message || 'Registration failed';
+      alert('Registration failed: ' + errorMessage);
     }
   };
 
