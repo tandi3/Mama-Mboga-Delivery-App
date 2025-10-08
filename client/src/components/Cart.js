@@ -12,7 +12,7 @@ const Cart = () => {
     const token = localStorage.getItem("token");
     if (!token) return navigate("/login");
     axios
-      .get("http://localhost:5000/cart", {
+      .get(`${process.env.REACT_APP_API_URL}/cart`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -33,7 +33,7 @@ const Cart = () => {
     }));
     axios
       .post(
-        "http://localhost:5000/order",
+        `${process.env.REACT_APP_API_URL}/order`,
         { cart_items: cartItemsData },
         { headers: { Authorization: `Bearer ${token}` } }
       )

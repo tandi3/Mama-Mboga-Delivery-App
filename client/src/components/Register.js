@@ -6,7 +6,7 @@ const Register = () => {
   const handleSubmit = async (values) => {
     try {
       // Send the request with Content-Type: application/json
-      await axios.post('http://localhost:5000/register', values, {
+      await axios.post(`${process.env.REACT_APP_API_URL}/register`, values, {
         headers: {
           'Content-Type': 'application/json',
         },

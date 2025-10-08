@@ -11,7 +11,7 @@ const Products = ({ searchQuery }) => {
   const [quantities, setQuantities] = useState({});
 
   useEffect(() => {
-    axios.get('http://localhost:5000/products')
+    axios.get(`${process.env.REACT_APP_API_URL}/products`)
       .then((response) => { setProducts(response.data); setLoading(false); })
       .catch(() => { setLoading(false); toast.error('Failed to fetch products!'); });
   }, []);
@@ -23,7 +23,7 @@ const Products = ({ searchQuery }) => {
     if (!token) { toast.error('Please log in to add items to your cart'); return; }
     if (quantity <= 0 || isNaN(quantity)) { toast.error('Quantity must be a positive integer'); return; }
     axios.post(
-      'http://localhost:5000/cart', 
+      `${process.env.REACT_APP_API_URL}/cart`, 
       { product_id: productId, quantity }, 
       { 
         headers: { 
