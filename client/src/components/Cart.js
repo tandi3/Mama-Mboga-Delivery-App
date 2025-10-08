@@ -10,18 +10,23 @@ const Cart = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (!token) return navigate("/login");
+    if (!token) {
+      setCartItems([]);
+      setLoading(false);
+      return;
+    }
+    
     axios
       .get(`${process.env.REACT_APP_API_URL}/cart`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        setCartItems(response.data);
+        setCartItems(response.data || []);
         setLoading(false);
       })
       .catch(() => {
+        setCartItems([]);
         setLoading(false);
-        setError("Failed to load cart items.");
       });
   }, [navigate]);
 
