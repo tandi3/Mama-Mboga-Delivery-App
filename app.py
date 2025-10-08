@@ -36,14 +36,13 @@ user_carts = {}
 user_orders = {}
 
 # Serve React App
-@app.route('/')
-def serve_react_app():
-    return send_from_directory(app.static_folder, 'index.html')
-
+@app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
-def serve_static_files(path):
+def serve_react_app(path):
+    # Serve static files if they exist
     if path and os.path.exists(os.path.join(app.static_folder, path)):
         return send_from_directory(app.static_folder, path)
+    # Otherwise serve index.html for React Router
     return send_from_directory(app.static_folder, 'index.html')
 
 # API Routes
