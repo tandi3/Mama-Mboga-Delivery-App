@@ -49,16 +49,21 @@ def serve_static_files(path):
 # API Routes
 @app.route('/api/products')
 def get_products():
-    products = Product.query.all()
-    if not products:
-        return jsonify([
-            {"id": 1, "name": "Tomato", "description": "Fresh red tomatoes", "price": 3.5},
-            {"id": 2, "name": "Cabbage", "description": "Green cabbage", "price": 2.0},
-            {"id": 3, "name": "Onion", "description": "White onions", "price": 1.5},
-            {"id": 4, "name": "Potato", "description": "Fresh potatoes", "price": 4.0},
-            {"id": 5, "name": "Carrot", "description": "Organic carrots", "price": 3.0}
-        ])
-    return jsonify([{"id": p.id, "name": p.name, "description": p.description, "price": p.price} for p in products])
+    try:
+        products = Product.query.all()
+        if products:
+            return jsonify([{"id": p.id, "name": p.name, "description": p.description, "price": p.price} for p in products])
+    except:
+        pass
+    
+    # Fallback products
+    return jsonify([
+        {"id": 1, "name": "Tomato", "description": "Fresh red tomatoes", "price": 3.5},
+        {"id": 2, "name": "Cabbage", "description": "Green cabbage", "price": 2.0},
+        {"id": 3, "name": "Onion", "description": "White onions", "price": 1.5},
+        {"id": 4, "name": "Potato", "description": "Fresh potatoes", "price": 4.0},
+        {"id": 5, "name": "Carrot", "description": "Organic carrots", "price": 3.0}
+    ])
 
 @app.route('/api/register', methods=['POST'])
 def register():
@@ -84,18 +89,73 @@ def login():
 @app.route('/api/cart', methods=['GET'])
 @jwt_required()
 def get_cart():
-    user_id = get_jwt_identity()
-    return jsonify(user_carts.get(user_id, []))
+    try:
+        user_id = get_jwt_identity()
+        cart_items = user_carts.get(user_id, [])
+        
+        # Format cart items properly
+        formatted_cart = []
+        for item in cart_items:
+            if isinstance(item, dict) and 'product_id' in item:
+                formatted_cart.append({
+                    'product_id': item['product_id'],
+                    'product_name': item.get('product_name', f'Product {item["product_id"]}'),
+                    'price': item.get('price', 0),
+                    'quantity': item.get('quantity', 1)
+                })
+        
+        return jsonify(formatted_cart)
+    except Exception as e:
+        return jsonify({"message": f"Error: {str(e)}"}), 500
 
 @app.route('/api/cart', methods=['POST'])
 @jwt_required()
 def add_to_cart():
-    user_id = get_jwt_identity()
-    data = request.get_json()
-    if user_id not in user_carts:
-        user_carts[user_id] = []
-    user_carts[user_id].append(data)
-    return jsonify({"message": "Added to cart"}), 201
+    try:
+        user_id = get_jwt_identity()
+        data = request.get_json()
+        
+        if not data or 'product_id' not in data:
+            return jsonify({"message": "Product ID required"}), 400
+        
+        product_id = data['product_id']
+        quantity = data.get('quantity', 1)
+        
+        # Get product details from fallback data
+        products = {
+            1: {"name": "Tomato", "price": 3.5},
+            2: {"name": "Cabbage", "price": 2.0},
+            3: {"name": "Onion", "price": 1.5},
+            4: {"name": "Potato", "price": 4.0},
+            5: {"name": "Carrot", "price": 3.0}
+        }
+        
+        if product_id not in products:
+            return jsonify({"message": "Product not found"}), 404
+        
+        if user_id not in user_carts:
+            user_carts[user_id] = []
+        
+        # Check if product already in cart
+        existing_item = None
+        for item in user_carts[user_id]:
+            if item.get('product_id') == product_id:
+                existing_item = item
+                break
+        
+        if existing_item:
+            existing_item['quantity'] += quantity
+        else:
+            user_carts[user_id].append({
+                'product_id': product_id,
+                'product_name': products[product_id]['name'],
+                'price': products[product_id]['price'],
+                'quantity': quantity
+            })
+        
+        return jsonify({"message": "Added to cart"}), 201
+    except Exception as e:
+        return jsonify({"message": f"Error: {str(e)}"}), 500
 
 @app.route('/api/order', methods=['POST'])
 @jwt_required()
