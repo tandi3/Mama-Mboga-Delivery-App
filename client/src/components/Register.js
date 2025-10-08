@@ -1,8 +1,11 @@
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 
 const Register = () => {
+  const navigate = useNavigate();
+  
   const handleSubmit = async (values) => {
     try {
       // Send the request with Content-Type: application/json
@@ -11,7 +14,8 @@ const Register = () => {
           'Content-Type': 'application/json',
         },
       });
-      alert('Registration successful!');
+      alert('Registration successful! Please login.');
+      navigate('/login');
     } catch (error) {
       console.error('Registration failed:', error);
       const errorMessage = error.response?.data?.message || error.message || 'Registration failed';
