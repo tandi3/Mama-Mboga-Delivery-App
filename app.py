@@ -56,13 +56,20 @@ def get_products():
     except:
         pass
     
-    # Fallback products
+    # Fallback products - 12 items
     return jsonify([
         {"id": 1, "name": "Tomato", "description": "Fresh red tomatoes", "price": 3.5},
         {"id": 2, "name": "Cabbage", "description": "Green cabbage", "price": 2.0},
         {"id": 3, "name": "Onion", "description": "White onions", "price": 1.5},
         {"id": 4, "name": "Potato", "description": "Fresh potatoes", "price": 4.0},
-        {"id": 5, "name": "Carrot", "description": "Organic carrots", "price": 3.0}
+        {"id": 5, "name": "Carrot", "description": "Organic carrots", "price": 3.0},
+        {"id": 6, "name": "Spinach", "description": "Fresh spinach", "price": 2.5},
+        {"id": 7, "name": "Kale", "description": "Organic kale", "price": 3.0},
+        {"id": 8, "name": "Lettuce", "description": "Crispy lettuce", "price": 2.0},
+        {"id": 9, "name": "Cucumber", "description": "Fresh cucumber", "price": 1.5},
+        {"id": 10, "name": "Bell Pepper", "description": "Colorful peppers", "price": 4.5},
+        {"id": 11, "name": "Broccoli", "description": "Fresh broccoli", "price": 3.5},
+        {"id": 12, "name": "Cauliflower", "description": "White cauliflower", "price": 3.0}
     ])
 
 @app.route('/api/register', methods=['POST'])
@@ -189,7 +196,14 @@ def add_to_cart():
             2: {"name": "Cabbage", "price": 2.0},
             3: {"name": "Onion", "price": 1.5},
             4: {"name": "Potato", "price": 4.0},
-            5: {"name": "Carrot", "price": 3.0}
+            5: {"name": "Carrot", "price": 3.0},
+            6: {"name": "Spinach", "price": 2.5},
+            7: {"name": "Kale", "price": 3.0},
+            8: {"name": "Lettuce", "price": 2.0},
+            9: {"name": "Cucumber", "price": 1.5},
+            10: {"name": "Bell Pepper", "price": 4.5},
+            11: {"name": "Broccoli", "price": 3.5},
+            12: {"name": "Cauliflower", "price": 3.0}
         }
         
         if product_id not in products:
@@ -246,6 +260,13 @@ with app.app_context():
             Product(name="Onion", description="White onions", price=1.5),
             Product(name="Potato", description="Fresh potatoes", price=4.0),
             Product(name="Carrot", description="Organic carrots", price=3.0),
+            Product(name="Spinach", description="Fresh spinach", price=2.5),
+            Product(name="Kale", description="Organic kale", price=3.0),
+            Product(name="Lettuce", description="Crispy lettuce", price=2.0),
+            Product(name="Cucumber", description="Fresh cucumber", price=1.5),
+            Product(name="Bell Pepper", description="Colorful peppers", price=4.5),
+            Product(name="Broccoli", description="Fresh broccoli", price=3.5),
+            Product(name="Cauliflower", description="White cauliflower", price=3.0),
         ]
         for product in products:
             db.session.add(product)
