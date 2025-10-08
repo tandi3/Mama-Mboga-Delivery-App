@@ -1,0 +1,21 @@
+Loading .env environment variables...
+ * Tip: There are .env files present. Install python-dotenv to use them.
+Database initialization error: (sqlite3.OperationalError) unable to open database file
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Starting server without database...
+Database initialization error: (sqlite3.OperationalError) unable to open database file
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Starting server without database...
+ * Serving Flask app 'app'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.0.224.72:5000
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Tip: There are .env files present. Install python-dotenv to use them.
+ * Debugger is active!
+ * Debugger PIN: 760-979-439
+127.0.0.1 - - [08/Oct/2025 09:10:53] "[33mGET / HTTP/1.1[0m" 404 -
+127.0.0.1 - - [08/Oct/2025 09:11:01] "[33mGET /products HTTP/1.1[0m" 404 -

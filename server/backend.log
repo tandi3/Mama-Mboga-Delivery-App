@@ -1,0 +1,133 @@
+Loading .env environment variables...
+ * Tip: There are .env files present. Install python-dotenv to use them.
+✓ Database initialized successfully
+Starting Mama Mboga Flask server...
+ * Serving Flask app 'working_app'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.0.224.72:5000
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Tip: There are .env files present. Install python-dotenv to use them.
+ * Debugger is active!
+ * Debugger PIN: 760-979-439
+127.0.0.1 - - [08/Oct/2025 09:59:07] "POST /login HTTP/1.1" 200 -
+/home/tandie/Mama-Mboga-Delivery-App/server/working_app.py:218: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  product = Product.query.get(item['product_id'])
+127.0.0.1 - - [08/Oct/2025 09:59:21] "[35m[1mPOST /order HTTP/1.1[0m" 201 -
+127.0.0.1 - - [08/Oct/2025 09:59:38] "GET /orders HTTP/1.1" 200 -
+127.0.0.1 - - [08/Oct/2025 10:00:17] "OPTIONS /orders HTTP/1.1" 200 -
+127.0.0.1 - - [08/Oct/2025 10:00:17] "GET /orders HTTP/1.1" 200 -
+127.0.0.1 - - [08/Oct/2025 10:00:17] "GET /orders HTTP/1.1" 200 -
+127.0.0.1 - - [08/Oct/2025 10:00:22] "GET /products HTTP/1.1" 200 -
+127.0.0.1 - - [08/Oct/2025 10:00:22] "GET /products HTTP/1.1" 200 -
+127.0.0.1 - - [08/Oct/2025 10:00:27] "OPTIONS /cart HTTP/1.1" 200 -
+/home/tandie/Mama-Mboga-Delivery-App/server/working_app.py:164: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  product = Product.query.get(product_id)
+127.0.0.1 - - [08/Oct/2025 10:00:27] "[35m[1mPOST /cart HTTP/1.1[0m" 201 -
+127.0.0.1 - - [08/Oct/2025 10:00:30] "[35m[1mPOST /cart HTTP/1.1[0m" 201 -
+127.0.0.1 - - [08/Oct/2025 10:00:35] "OPTIONS /cart HTTP/1.1" 200 -
+127.0.0.1 - - [08/Oct/2025 10:00:35] "[35m[1mPOST /cart HTTP/1.1[0m" 201 -
+127.0.0.1 - - [08/Oct/2025 10:00:37] "[35m[1mPOST /cart HTTP/1.1[0m" 201 -
+127.0.0.1 - - [08/Oct/2025 10:00:42] "OPTIONS /cart HTTP/1.1" 200 -
+127.0.0.1 - - [08/Oct/2025 10:00:42] "[35m[1mPOST /cart HTTP/1.1[0m" 201 -
+127.0.0.1 - - [08/Oct/2025 10:00:48] "OPTIONS /cart HTTP/1.1" 200 -
+127.0.0.1 - - [08/Oct/2025 10:00:48] "OPTIONS /cart HTTP/1.1" 200 -
+/home/tandie/Mama-Mboga-Delivery-App/server/working_app.py:135: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  product = Product.query.get(item['product_id'])
+127.0.0.1 - - [08/Oct/2025 10:00:48] "GET /cart HTTP/1.1" 200 -
+127.0.0.1 - - [08/Oct/2025 10:00:48] "GET /cart HTTP/1.1" 200 -
+127.0.0.1 - - [08/Oct/2025 10:00:52] "OPTIONS /order HTTP/1.1" 200 -
+127.0.0.1 - - [08/Oct/2025 10:00:52] "[35m[1mPOST /order HTTP/1.1[0m" 201 -
+127.0.0.1 - - [08/Oct/2025 10:00:52] "OPTIONS /orders HTTP/1.1" 200 -
+127.0.0.1 - - [08/Oct/2025 10:00:52] "GET /orders HTTP/1.1" 200 -
+127.0.0.1 - - [08/Oct/2025 10:00:52] "GET /orders HTTP/1.1" 200 -
+127.0.0.1 - - [08/Oct/2025 10:00:59] "OPTIONS /cart HTTP/1.1" 200 -
+127.0.0.1 - - [08/Oct/2025 10:00:59] "OPTIONS /cart HTTP/1.1" 200 -
+127.0.0.1 - - [08/Oct/2025 10:00:59] "GET /cart HTTP/1.1" 200 -
+127.0.0.1 - - [08/Oct/2025 10:00:59] "GET /cart HTTP/1.1" 200 -
+127.0.0.1 - - [08/Oct/2025 10:01:31] "OPTIONS /register HTTP/1.1" 200 -
+127.0.0.1 - - [08/Oct/2025 10:01:31] "[35m[1mPOST /register HTTP/1.1[0m" 201 -
+127.0.0.1 - - [08/Oct/2025 10:01:38] "OPTIONS /register HTTP/1.1" 200 -
+127.0.0.1 - - [08/Oct/2025 10:01:38] "[31m[1mPOST /register HTTP/1.1[0m" 400 -
+127.0.0.1 - - [08/Oct/2025 10:02:35] "[35m[1mPOST /register HTTP/1.1[0m" 201 -
+127.0.0.1 - - [08/Oct/2025 10:02:46] "[31m[1mPOST /register HTTP/1.1[0m" 400 -
+127.0.0.1 - - [08/Oct/2025 10:04:16] "OPTIONS /register HTTP/1.1" 200 -
+127.0.0.1 - - [08/Oct/2025 10:04:16] "[35m[1mPOST /register HTTP/1.1[0m" 201 -
+127.0.0.1 - - [08/Oct/2025 10:04:23] "GET /products HTTP/1.1" 200 -
+127.0.0.1 - - [08/Oct/2025 10:04:23] "GET /products HTTP/1.1" 200 -
+ * Detected change in '/home/tandie/Mama-Mboga-Delivery-App/server/app.py', reloading
+✓ Database initialized successfully
+Starting Mama Mboga Flask server...
+Place order data: {'cart_items': [{'product_id': 1, 'quantity': 2}, {'product_id': 2, 'quantity': 1}]}
+Order placed for user 10: 2 items
+Fetching orders for user 10: 2 orders
+Fetching orders for user 6: 0 orders
+Fetching orders for user 6: 0 orders
+Add to cart data: {'product_id': 1, 'quantity': 5}
+Cart updated for user 6: [{'product_id': 1, 'quantity': 5}]
+Add to cart data: {'product_id': 3, 'quantity': 1}
+Cart updated for user 6: [{'product_id': 1, 'quantity': 5}, {'product_id': 3, 'quantity': 1}]
+Add to cart data: {'product_id': 3, 'quantity': 3}
+Cart updated for user 6: [{'product_id': 1, 'quantity': 5}, {'product_id': 3, 'quantity': 4}]
+Add to cart data: {'product_id': 4, 'quantity': 1}
+Cart updated for user 6: [{'product_id': 1, 'quantity': 5}, {'product_id': 3, 'quantity': 4}, {'product_id': 4, 'quantity': 1}]
+Add to cart data: {'product_id': 4, 'quantity': 5}
+Cart updated for user 6: [{'product_id': 1, 'quantity': 5}, {'product_id': 3, 'quantity': 4}, {'product_id': 4, 'quantity': 6}]
+Place order data: {'cart_items': [{'product_id': 1, 'quantity': 5}, {'product_id': 3, 'quantity': 4}, {'product_id': 4, 'quantity': 6}]}
+Order placed for user 6: 3 items
+Fetching orders for user 6: 3 orders
+Fetching orders for user 6: 3 orders
+Registration data received: {'email': 'ysoyucho@gmail.com', 'password': '123456', 'confirmPassword': '123456', 'role': 'vendor'}
+User created successfully: ysoyucho@gmail.com
+Registration data received: {'email': 'ysoyucho@gmail.com', 'password': '123456', 'confirmPassword': '123456', 'role': 'customer'}
+Registration data received: {'email': 'customer@test.com', 'password': 'password123', 'confirmPassword': 'password123', 'role': 'customer'}
+User created successfully: customer@test.com
+Registration data received: {'email': 'testuser@example.com', 'password': 'password123', 'confirmPassword': 'password123', 'role': 'customer'}
+Registration data received: {'email': 'loyucho@gmail.com', 'password': '123456', 'confirmPassword': '123456', 'role': 'customer'}
+User created successfully: loyucho@gmail.com
+ * Restarting with stat
+ * Tip: There are .env files present. Install python-dotenv to use them.
+ * Debugger is active!
+ * Debugger PIN: 760-979-439
+127.0.0.1 - - [08/Oct/2025 10:23:04] "OPTIONS /login HTTP/1.1" 200 -
+127.0.0.1 - - [08/Oct/2025 10:23:04] "POST /login HTTP/1.1" 200 -
+127.0.0.1 - - [08/Oct/2025 10:23:04] "GET /products HTTP/1.1" 200 -
+127.0.0.1 - - [08/Oct/2025 10:23:08] "OPTIONS /cart HTTP/1.1" 200 -
+/home/tandie/Mama-Mboga-Delivery-App/server/working_app.py:164: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  product = Product.query.get(product_id)
+127.0.0.1 - - [08/Oct/2025 10:23:08] "[35m[1mPOST /cart HTTP/1.1[0m" 201 -
+127.0.0.1 - - [08/Oct/2025 10:23:12] "[35m[1mPOST /cart HTTP/1.1[0m" 201 -
+127.0.0.1 - - [08/Oct/2025 10:23:14] "OPTIONS /cart HTTP/1.1" 200 -
+/home/tandie/Mama-Mboga-Delivery-App/server/working_app.py:135: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  product = Product.query.get(item['product_id'])
+127.0.0.1 - - [08/Oct/2025 10:23:14] "GET /cart HTTP/1.1" 200 -
+127.0.0.1 - - [08/Oct/2025 10:23:17] "OPTIONS /order HTTP/1.1" 200 -
+/home/tandie/Mama-Mboga-Delivery-App/server/working_app.py:218: LegacyAPIWarning: The Query.get() method is considered legacy as of the 1.x series of SQLAlchemy and becomes a legacy construct in 2.0. The method is now available as Session.get() (deprecated since: 2.0) (Background on SQLAlchemy 2.0 at: https://sqlalche.me/e/b8d9)
+  product = Product.query.get(item['product_id'])
+127.0.0.1 - - [08/Oct/2025 10:23:17] "[35m[1mPOST /order HTTP/1.1[0m" 201 -
+127.0.0.1 - - [08/Oct/2025 10:23:17] "OPTIONS /orders HTTP/1.1" 200 -
+127.0.0.1 - - [08/Oct/2025 10:23:17] "GET /orders HTTP/1.1" 200 -
+ * Detected change in '/home/tandie/Mama-Mboga-Delivery-App/server/app.py', reloading
+✓ Database initialized successfully
+Starting Mama Mboga Flask server...
+Add to cart data: {'product_id': 1, 'quantity': 1}
+Cart updated for user 6: [{'product_id': 1, 'quantity': 1}]
+Add to cart data: {'product_id': 1, 'quantity': 7}
+Cart updated for user 6: [{'product_id': 1, 'quantity': 8}]
+Place order data: {'cart_items': [{'product_id': 1, 'quantity': 8}]}
+Order placed for user 6: 1 items
+Fetching orders for user 6: 1 orders
+ * Restarting with stat
+ * Tip: There are .env files present. Install python-dotenv to use them.
+ * Debugger is active!
+ * Debugger PIN: 760-979-439
+ * Detected change in '/home/tandie/Mama-Mboga-Delivery-App/server/app.py', reloading
+✓ Database initialized successfully
+Starting Mama Mboga Flask server...
+ * Restarting with stat
+ * Tip: There are .env files present. Install python-dotenv to use them.
+ * Debugger is active!
+ * Debugger PIN: 760-979-439

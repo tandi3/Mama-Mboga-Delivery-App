@@ -1,0 +1,12 @@
+Loading .env environment variables...
+ * Tip: There are .env files present. Install python-dotenv to use them.
+Database initialization error: (sqlite3.OperationalError) unable to open database file
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Starting server without database...
+Database initialization error: (sqlite3.OperationalError) unable to open database file
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+Starting server without database...
+ * Serving Flask app 'app'
+ * Debug mode: off
+Address already in use
+Port 5000 is in use by another program. Either identify and stop that program, or start the server with a different port.

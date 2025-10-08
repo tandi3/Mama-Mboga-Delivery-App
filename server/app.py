@@ -1,18 +1,18 @@
 import os
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory, send_file
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity, get_jwt
 from flask_cors import CORS
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='../client/build', static_url_path='')
 CORS(app, origins=["*"], supports_credentials=True)
 
-# Simple database configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///mama_mboga.db'
+# Database configuration
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///mama_mboga.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = 'your-secret-key-here'
-app.config['JWT_SECRET_KEY'] = 'jwt-secret-string'
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'your-secret-key-here')
+app.config['JWT_SECRET_KEY'] = os.environ.get('SECRET_KEY', 'jwt-secret-string')
 
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
@@ -36,12 +36,24 @@ class Product(db.Model):
     price = db.Column(db.Float, nullable=False)
     vendor_id = db.Column(db.Integer, nullable=False, default=1)
 
-# Routes
+# Serve React App
 @app.route('/')
-def home():
+def serve_react_app():
+    return send_from_directory(app.static_folder, 'index.html')
+
+@app.route('/<path:path>')
+def serve_static_files(path):
+    if path != "" and os.path.exists(os.path.join(app.static_folder, path)):
+        return send_from_directory(app.static_folder, path)
+    else:
+        return send_from_directory(app.static_folder, 'index.html')
+
+# API Routes
+@app.route('/api')
+def api_home():
     return jsonify({"message": "Mama Mboga Delivery App API is running!", "status": "success"})
 
-@app.route('/products')
+@app.route('/api/products')
 def get_products():
     try:
         products = Product.query.all()
@@ -60,7 +72,7 @@ def get_products():
             {"id": 5, "name": "Carrot", "description": "Organic carrots", "price": 3.0}
         ])
 
-@app.route('/register', methods=['POST'])
+@app.route('/api/register', methods=['POST'])
 def register():
     try:
         data = request.get_json()
@@ -103,7 +115,7 @@ def register():
         print(f"Registration error: {str(e)}")  # Debug log
         return jsonify({"message": f"Registration failed: {str(e)}"}), 500
 
-@app.route('/login', methods=['POST'])
+@app.route('/api/login', methods=['POST'])
 def login():
     try:
         data = request.get_json()
@@ -122,7 +134,7 @@ def login():
     except Exception as e:
         return jsonify({"message": f"Error: {str(e)}"}), 500
 
-@app.route('/cart', methods=['GET'])
+@app.route('/api/cart', methods=['GET'])
 @jwt_required()
 def get_cart():
     try:
@@ -146,7 +158,7 @@ def get_cart():
         print(f"Cart GET error: {str(e)}")
         return jsonify({"message": f"Error: {str(e)}"}), 500
 
-@app.route('/cart', methods=['POST'])
+@app.route('/api/cart', methods=['POST'])
 @jwt_required()
 def add_to_cart():
     try:
@@ -190,7 +202,7 @@ def add_to_cart():
         print(f"Add to cart error: {str(e)}")
         return jsonify({"message": f"Error: {str(e)}"}), 500
 
-@app.route('/order', methods=['POST'])
+@app.route('/api/order', methods=['POST'])
 @jwt_required()
 def place_order():
     try:
@@ -240,9 +252,8 @@ def place_order():
         print(f"Place order error: {str(e)}")
         return jsonify({"message": f"Error: {str(e)}"}), 500
 
-@app.route('/orders', methods=['GET'])
-@jwt_required()
-def get_orders():
+@app.route('/api/orders', methods=['GET'])
+@jwt_required():
     try:
         user_id = get_jwt_identity()
         orders = user_orders.get(user_id, [])
