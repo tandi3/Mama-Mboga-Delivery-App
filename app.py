@@ -35,13 +35,18 @@ class Product(db.Model):
 user_carts = {}
 user_orders = {}
 
-# Serve React App
+# Serve React App - must be AFTER all API routes
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def serve_react_app(path):
+    # Don't intercept API routes
+    if path.startswith('api/'):
+        return jsonify({"error": "Not found"}), 404
+    
     # Serve static files if they exist
     if path and os.path.exists(os.path.join(app.static_folder, path)):
         return send_from_directory(app.static_folder, path)
+    
     # Otherwise serve index.html for React Router
     return send_from_directory(app.static_folder, 'index.html')
 
