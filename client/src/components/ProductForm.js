@@ -8,7 +8,7 @@ const ProductForm = ({ product }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/products')
+    axios.get(`${process.env.REACT_APP_API_URL}/products`)
       .then((response) => {
         setProducts(response.data);
         setLoading(false);
@@ -18,7 +18,7 @@ const ProductForm = ({ product }) => {
 
   const handleSubmit = async (values) => {
     try {
-      const url = product ? `http://localhost:5000/products/${product.id}` : 'http://localhost:5000/products';
+      const url = product ? `${process.env.REACT_APP_API_URL}/products/${product.id}` : `${process.env.REACT_APP_API_URL}/products`;
       const method = product ? 'put' : 'post';
       await axios[method](url, values);
       alert(`Product ${product ? 'updated' : 'added'} successfully!`);
@@ -31,7 +31,7 @@ const ProductForm = ({ product }) => {
     const token = localStorage.getItem('token');
     if (!token) return alert('You need to be logged in to place an order!');
     try {
-      await axios.post('http://localhost:5000/order', { product_id: productId }, {
+      await axios.post(`${process.env.REACT_APP_API_URL}/order`, { product_id: productId }, {
         headers: { Authorization: `Bearer ${token}` },
       });
       alert('Order placed successfully!');

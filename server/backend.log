@@ -131,3 +131,5 @@ Starting Mama Mboga Flask server...
  * Tip: There are .env files present. Install python-dotenv to use them.
  * Debugger is active!
  * Debugger PIN: 760-979-439
+127.0.0.1 - - [08/Oct/2025 11:18:32] "OPTIONS /login HTTP/1.1" 200 -
+127.0.0.1 - - [08/Oct/2025 11:18:32] "POST /login HTTP/1.1" 200 -

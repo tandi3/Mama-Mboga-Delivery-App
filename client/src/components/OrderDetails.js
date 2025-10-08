@@ -17,7 +17,7 @@ const OrderDetails = () => {
       return;
     }
     axios
-      .get(`http://localhost:5000/order/${id}`, {
+      .get(`${process.env.REACT_APP_API_URL}/order/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {

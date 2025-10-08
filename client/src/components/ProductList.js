@@ -10,44 +10,39 @@ const ProductList = () => {
   const token = localStorage.getItem('token');  // Ensure JWT token is retrieved
 
   useEffect(() => {
-    if (token) {  // Check if user is logged in and token exists
-      axios
-        .get('http://localhost:5000/products', {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-        .then((response) => {
-          setProducts(response.data); // Set products state
-        })
-        .catch((error) => {
-          setError('Failed to fetch products');
-          console.error('Error fetching products:', error);
-        });
-    } else {
-      setError('Please log in to view products.');
-    }
-  }, [token]);
+    // Fetch products without requiring authentication
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/products`)
+      .then((response) => {
+        setProducts(response.data); // Set products state
+      })
+      .catch((error) => {
+        setError('Failed to fetch products');
+        console.error('Error fetching products:', error);
+      });
+  }, []);
 
-  const handleAddToOrder = async (productId) => {
+  const handleAddToCart = async (productId) => {
     if (!token) {
-      setError('Please log in to place an order.');
+      setError('Please log in to add items to cart.');
       return;
     }
 
     try {
-      // Make the request to place an order for the selected product
+      // Make the request to add product to cart
       const response = await axios.post(
-        'http://localhost:5000/order',
-        { product_id: productId },
+        `${process.env.REACT_APP_API_URL}/cart`,
+        { product_id: productId, quantity: 1 },
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
       // Success: Show success message and reset error
-      setSuccessMessage('Order placed successfully!');
+      setSuccessMessage('Product added to cart successfully!');
       setError(null);
     } catch (error) {
-      // Handle error when placing the order
-      setError('Failed to place order.');
-      console.error('Error placing order:', error);
+      // Handle error when adding to cart
+      setError('Failed to add to cart.');
+      console.error('Error adding to cart:', error);
     }
   };
 
@@ -81,9 +76,9 @@ const ProductList = () => {
                     <Button 
                       variant="primary" 
                       size="sm" 
-                      onClick={() => handleAddToOrder(product.id)}
+                      onClick={() => handleAddToCart(product.id)}
                     >
-                      Add to Order
+                      Add to Cart
                     </Button>
                   </div>
                 </Card.Body>

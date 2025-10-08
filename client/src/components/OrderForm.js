@@ -11,7 +11,7 @@ const OrderForm = () => {
   useEffect(() => {
     if (token) {
       axios
-        .get('http://localhost:5000/products', { headers: { Authorization: `Bearer ${token}` } })
+        .get(`${process.env.REACT_APP_API_URL}/products`, { headers: { Authorization: `Bearer ${token}` } })
         .then((response) => setProducts(response.data))
         .catch(() => setError('Failed to fetch products. Please try again.'));
     } else {
@@ -21,7 +21,7 @@ const OrderForm = () => {
 
   const handleSubmit = async (values) => {
     try {
-      await axios.post('http://localhost:5000/order', values, { headers: { Authorization: `Bearer ${token}` } });
+      await axios.post(`${process.env.REACT_APP_API_URL}/order`, values, { headers: { Authorization: `Bearer ${token}` } });
       alert('Order placed successfully!');
     } catch {
       alert('Error placing order. Please try again.');
